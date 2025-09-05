@@ -1,3 +1,4 @@
+
 <!-- Author: Aidan Borkan -->
 <!DOCTYPE html>
 <html>
@@ -99,10 +100,68 @@
     const AUTO_ZOOM = 12;    // how close when clicking a point
     const FLY_SPEED = 1.2;   // animation feel
 
-    /* 4) LABEL + ADDRESS HELPERS */
-    function pickLabel(p){ if(p.Name) return String(p.Name); return p.name||p.title||p.site||p.station||'Location'; }
-    function pickAddress(p){ return p.Address||p.address||p.addr||p['Street Address']||p['Street']||p['Address 1']||null; }
-    function buildPopupHTML(p){ const t=pickLabel(p), a=pickAddress(p); return a?`<strong>${t}</strong><br>${a}`:`<strong>${t}</strong>`; }
+    /* 4) PROPERTY HELPERS (Name, Address, Phone, Website, etc.) */
+
+// Generic getter: look up a property by trying multiple possible keys
+function getProp(p, keys) {
+  for (const k of keys) {
+    if (p && p[k] != null && String(p[k]).trim() !== '') return String(p[k]);
+  }
+  return null;
+}
+
+function pickLabel(p) {
+  return getProp(p, ['Name','name','title','site','station']) || 'Location';
+}
+
+function pickAddress(p) {
+  return getProp(p, ['Address','address','addr','Street Address','Street','Address 1']);
+}
+
+function pickPhone(p) {
+  return getProp(p, ['Phone','phone','Telephone','telephone','tel']);
+}
+
+function pickWebsite(p) {
+  let w = getProp(p, ['Website','website','URL','url','Link','link']);
+  if (!w) return null;
+  if (!/^https?:\/\//i.test(w)) w = 'https://' + w; // normalize if missing protocol
+  return w;
+}
+
+function pickDescriptionHTML(p) {
+  return getProp(p, ['Description','description']);
+}
+
+// Escape plain text (not HTML)
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+// Build popup content using the helpers
+function buildPopupHTML(p) {
+  const title = esc(pickLabel(p));
+  const addr  = pickAddress(p);
+  const phone = pickPhone(p);
+  const web   = pickWebsite(p);
+  const descHTML = pickDescriptionHTML(p);
+
+  const rows = [];
+  if (addr)  rows.push(`<div><strong>Address:</strong> ${esc(addr)}</div>`);
+  if (phone) rows.push(`<div><strong>Phone:</strong> <a href="tel:${esc(phone)}">${esc(phone)}</a></div>`);
+  if (web)   rows.push(`<div><strong>Website:</strong> <a href="${esc(web)}" target="_blank" rel="noopener">${esc(web)}</a></div>`);
+  if (descHTML) rows.push(`<div style="margin-top:6px">${descHTML}</div>`);
+
+  return `
+    <div style="min-width:220px">
+      <div style="font-weight:700;margin-bottom:4px">${title}</div>
+      ${rows.join('')}
+    </div>
+  `;
+}
 
     /* 5) INTERACTIVITY (hover + click) — with auto-zoom */
     const hoverPopup = new mapboxgl.Popup({ closeButton:false, closeOnClick:false, className:'tooltip' });
@@ -138,7 +197,7 @@
       });
     }
 
-    /* Optional: click empty map to reset to default view */
+    /* user can click empty map to reset to default view */
     map.on('click', (e) => {
       const hits = map.queryRenderedFeatures(e.point, { layers: Object.values(LAYERS) });
       if (hits.length) return; // clicked a feature; let that handler run
