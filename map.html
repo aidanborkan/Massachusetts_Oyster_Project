@@ -1,195 +1,188 @@
+<!-- Author: Aidan Borkan -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <title>Massachusetts View</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- GL JS that your style supports -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css" rel="stylesheet" />
 
   <style>
-    /* Full-bleed map */
-    html, body { height: 100%; margin: 0; }
-    #map { position: absolute; inset: 0; }
+    /* Arial everywhere */
+    body, .tooltip, #legend, #legend h3, .legend-row { font-family: Arial, Helvetica, sans-serif !important; }
 
-    /* Hover tooltip */
-    .tooltip {
-      font: 600 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
-      padding: 6px 8px;
+    /* sizes only (don’t reintroduce Segoe) */
+    .tooltip { font-weight: 600; font-size: 12px; line-height: 1.2; padding: 6px 8px; }
+    #legend  { font-weight: 500; font-size: 13px; line-height: 1.3; }
+    #legend h3 { font-weight: 700; font-size: 13px; line-height: 1; letter-spacing: .02em; }
+
+    /* full-bleed map */
+    html, body { height: 100%; margin: 0; overscroll-behavior: none; }
+    #map { position: absolute; inset: 0; z-index: 0; }
+
+    /* ensure the Mapbox canvas receives pointer events */
+    #map canvas.mapboxgl-canvas {
+      pointer-events: auto !important;
+      width: 100% !important;
+      height: 100% !important;
     }
 
-    /* ---- Legend styles ---- */
+    /* legend */
     #legend {
-      position: absolute;
-      right: 14px;
-      bottom: 14px;
-      background: rgba(255,255,255,0.92);
-      border-radius: 10px;
+      position: absolute; right: 14px; bottom: 14px;
+      background: rgba(255,255,255,0.92); border-radius: 10px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-      padding: 10px 12px;
-      font: 500 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
-      z-index: 1;
-      max-width: 240px;
-      user-select: none;
+      padding: 10px 12px; z-index: 1; max-width: 260px; user-select: none;
     }
-    #legend h3 {
-      margin: 0 0 8px 0;
-      font: 700 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
-      letter-spacing: .02em;
-    }
-    .legend-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 6px 0;
-      white-space: nowrap;
-    }
-    .swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset;
-      flex: 0 0 12px;
-    }
-    .swatch.red    { background:#E74C3C; }  /* restaurants */
-    .swatch.purple { background:#8E44AD; }  /* upwellers   */
-    .swatch.black  { background:#000000; }  /* recycling   */
-
-    .legend-row input {
-      transform: translateY(1px);
-    }
+    .legend-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; white-space: nowrap; }
+    .swatch { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset; flex: 0 0 12px; }
+    .swatch.red{background:#E74C3C;} .swatch.purple{background:#8E44AD;} .swatch.black{background:#000;} .swatch.green{background:#27AE60;}
+    .legend-row input { transform: translateY(1px); }
   </style>
 </head>
 <body>
-  <!-- Map container -->
   <div id="map"></div>
 
-  <!-- Legend UI -->
   <div id="legend">
     <h3>Legend</h3>
-    <label class="legend-row">
-      <span class="swatch red"></span>
-      <input type="checkbox" id="lg-rest" checked />
-      Participating Restaurants
-    </label>
-    <label class="legend-row">
-      <span class="swatch purple"></span>
-      <input type="checkbox" id="lg-up" checked />
-      Upwellers
-    </label>
-    <label class="legend-row">
-      <span class="swatch black"></span>
-      <input type="checkbox" id="lg-rec" checked />
-      Shell Recycling
-    </label>
+    <label class="legend-row"><span class="swatch red"></span><input type="checkbox" id="lg-rest" checked/> Participating Restaurants</label>
+    <label class="legend-row"><span class="swatch purple"></span><input type="checkbox" id="lg-up" checked/> Upwellers</label>
+    <label class="legend-row"><span class="swatch black"></span><input type="checkbox" id="lg-rec" checked/> Shell Recycling</label>
+    <label class="legend-row"><span class="swatch green"></span><input type="checkbox" id="lg-age" checked/> Shell Aging Stations</label>
   </div>
 
-  <!-- Mapbox GL runtime -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js"></script>
-
   <script>
     /* 1) AUTH + MAP BOOTSTRAP */
-    mapboxgl.accessToken =
-      'pk.eyJ1IjoiYWlkYW5qYiIsImEiOiJjbWV1YTUwd2MwMDJ0Mm1xMmJ4aGx5c2k4In0.2YPGXb3rTY1xEkdkZLxlBA';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWlkYW5qYiIsImEiOiJjbWV1YTUwd2MwMDJ0Mm1xMmJ4aGx5c2k4In0.2YPGXb3rTY1xEkdkZLxlBA';
 
+    const STYLE_BASE = 'mapbox://styles/aidanjb/cmeuap7d2001701s65sd92ufi?fresh=true';
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/aidanjb/cmeuap7d2001701s65sd92ufi?fresh=true&v=' + Date.now(),
+      style: STYLE_BASE + '&v=' + Date.now(),          // cache-bust the style
       center: [-71.8, 42.2],
-      zoom: 7.5
-    });
+      zoom: 7.5,
+      transformRequest: (url) => {                     // cache-bust tiles/sprites/glyphs
+        const sep = url.includes('?') ? '&' : '?';
+        return { url: url + sep + 'ts=' + Date.now() };
+      }
+    }); // ← constructor ends here
+
+    /* enable interactions explicitly AFTER the constructor */
+    map.scrollZoom.enable();
+    map.dragPan.enable();
+    map.touchZoomRotate.enable();
+    map.doubleClickZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
     /* 2) MASSACHUSETTS FRAMING + UI */
     const MA_BOUNDS = [[-73.55, 41.18], [-69.86, 42.89]];
+    const DEFAULT_VIEW = { center: [-71.8, 42.2], zoom: 7.5 };
     map.on('load', () => {
       map.fitBounds(MA_BOUNDS, { padding: 40 });
       map.setMaxBounds([[-74.2, 40.9], [-69.2, 43.3]]);
+      map.getCanvas().style.pointerEvents = 'auto'; // belt & suspenders
     });
-    map.addControl(new mapboxgl.NavigationControl());
 
-    /* 3) LAYER IDS — must match exactly what your style has */
+    /* 3) LAYER IDS — exact */
     const LAYERS = {
       restaurants: 'participating-restaurants-8q4xbw',
-      upwellers:   'upwellers-40nzuv (1)',           // change if the actual ID differs
-      recycling:   'layer-24-7-shell-recycling-st-8xfv9w ' 
+      upwellers:   'upwellers-40nzuv (1)',
+      recycling:   'layer-24-7-shell-recycling-st-8xfv9w',
+      shellAging:  'shell-aging-stations-8v46hj'
     };
 
+    /* 3b) Auto-zoom constants */
+    const AUTO_ZOOM = 12;    // how close when clicking a point
+    const FLY_SPEED = 1.2;   // animation feel
+
     /* 4) LABEL + ADDRESS HELPERS */
-    function pickLabel(p) {
-      if (p.Name) return String(p.Name);
-      return p.name || p.title || p.site || p.station || 'Location';
-    }
-    function pickAddress(p) {
-      return (
-        p.Address || p.address || p.addr ||
-        p['Street Address'] || p['Street'] || p['Address 1'] ||
-        null
-      );
-    }
-    function buildPopupHTML(p) {
-      const title = pickLabel(p);
-      const addr  = pickAddress(p);
-      return addr ? `<strong>${title}</strong><br>${addr}`
-                  : `<strong>${title}</strong>`;
-    }
+    function pickLabel(p){ if(p.Name) return String(p.Name); return p.name||p.title||p.site||p.station||'Location'; }
+    function pickAddress(p){ return p.Address||p.address||p.addr||p['Street Address']||p['Street']||p['Address 1']||null; }
+    function buildPopupHTML(p){ const t=pickLabel(p), a=pickAddress(p); return a?`<strong>${t}</strong><br>${a}`:`<strong>${t}</strong>`; }
 
-    /* 5) INTERACTIVITY (hover + click) */
-    const hoverPopup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false,
-      className: 'tooltip'
-    });
-
-    function wireHoverAndClick(layerId) {
+    /* 5) INTERACTIVITY (hover + click) — with auto-zoom */
+    const hoverPopup = new mapboxgl.Popup({ closeButton:false, closeOnClick:false, className:'tooltip' });
+    function wireHoverAndClick(layerId){
       if (!map.getLayer(layerId)) { console.warn('Layer not found:', layerId); return; }
 
       map.on('mousemove', layerId, (e) => {
-        const f = e.features && e.features[0];
-        if (!f) return;
+        const f = e.features && e.features[0]; if (!f) return;
         hoverPopup.setLngLat(e.lngLat).setHTML(pickLabel(f.properties)).addTo(map);
         map.getCanvas().style.cursor = 'pointer';
       });
+
       map.on('mouseleave', layerId, () => {
         hoverPopup.remove();
         map.getCanvas().style.cursor = '';
       });
+
       map.on('click', layerId, (e) => {
-        const f = e.features && e.features[0];
-        if (!f) return;
+        const f = e.features && e.features[0]; if (!f) return;
+
         new mapboxgl.Popup()
           .setLngLat(f.geometry.coordinates)
           .setHTML(buildPopupHTML(f.properties))
           .addTo(map);
+
+        map.flyTo({
+          center: f.geometry.coordinates,
+          zoom: AUTO_ZOOM,
+          speed: FLY_SPEED,
+          curve: 1.42,
+          essential: true
+        });
       });
     }
 
-    /* 6) WIRE INTERACTIONS + LEGEND TOGGLES WHEN STYLE IS READY */
-    map.on('load', () => {
-      const present = map.getStyle().layers.map(l => l.id);
-      Object.values(LAYERS).forEach(id => {
-        if (!present.includes(id)) console.warn('Missing layer:', id);
-      });
+    /* Optional: click empty map to reset to default view */
+    map.on('click', (e) => {
+      const hits = map.queryRenderedFeatures(e.point, { layers: Object.values(LAYERS) });
+      if (hits.length) return; // clicked a feature; let that handler run
+      map.easeTo({ center: DEFAULT_VIEW.center, zoom: DEFAULT_VIEW.zoom, duration: 600 });
+    });
 
-      // Interactivity
+    /* 6) FORCE GREEN + SIZE HELPERS */
+    function bumpCircle(layerId, base){
+      const lyr = map.getLayer(layerId); if (!lyr || lyr.type !== 'circle') return;
+      map.setPaintProperty(layerId, 'circle-radius', [
+        'interpolate', ['linear'], ['zoom'],
+        6,  base-2,
+        10, base,
+        13, base+4
+      ]);
+      map.setPaintProperty(layerId, 'circle-stroke-color', '#ffffff');
+      map.setPaintProperty(layerId, 'circle-stroke-width', 1);
+    }
+    function forceGreen(layerId){
+      const lyr = map.getLayer(layerId); if (!lyr) return;
+      if (lyr.type === 'circle') map.setPaintProperty(layerId,'circle-color','#27AE60');
+      else { try{ map.setPaintProperty(layerId,'icon-color','#27AE60'); }catch(e){} try{ map.setPaintProperty(layerId,'text-color','#27AE60'); }catch(e){} }
+    }
+
+    /* 7) WIRE AFTER STYLE LOAD */
+    map.on('load', () => {
       wireHoverAndClick(LAYERS.restaurants);
       wireHoverAndClick(LAYERS.upwellers);
       wireHoverAndClick(LAYERS.recycling);
+      wireHoverAndClick(LAYERS.shellAging);
 
-      // Legend toggle handlers
-      function toggle(checkboxId, layerId) {
-        const el = document.getElementById(checkboxId);
-        if (!el) return;
-        el.addEventListener('change', () => {
-          const visible = el.checked ? 'visible' : 'none';
-          if (map.getLayer(layerId)) {
-            map.setLayoutProperty(layerId, 'visibility', visible);
-          }
-        });
+      if (map.getLayer(LAYERS.shellAging)) {
+        map.setLayoutProperty(LAYERS.shellAging, 'visibility', 'visible');
+        map.setLayerZoomRange(LAYERS.shellAging, 0, 24);
+        try { map.setFilter(LAYERS.shellAging, null); } catch(e){}
+        const top = map.getStyle().layers.slice(-1)[0].id;
+        map.moveLayer(LAYERS.shellAging, top);
       }
-      toggle('lg-rest', LAYERS.restaurants);
-      toggle('lg-up',   LAYERS.upwellers);
-      toggle('lg-rec',  LAYERS.recycling);
+
+      forceGreen(LAYERS.shellAging);
+      bumpCircle(LAYERS.shellAging, 12);
+      bumpCircle(LAYERS.restaurants, 8);
+      bumpCircle(LAYERS.upwellers, 10);
+      bumpCircle(LAYERS.recycling, 10);
     });
   </script>
 </body>
