@@ -9,12 +9,12 @@
 2023,The Barley Neck,"5 Beach Rd,  Orleans, MA 02653",41.784817,-69.9639675,145,1896.34
 2024,The Barley Neck,"5 Beach Rd,  Orleans, MA 02653",41.784817,-69.9639675,106,2222.16
 2025,The Barley Neck,"5 Beach Rd,  Orleans, MA 02653",41.784817,-69.9639675,103,2058
-2021,Beachcomber in Wellfleet,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,54,1214
-2022,Beachcomber in Wellfleet,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,208,5002.2
-2023,Beachcomber in Wellfleet,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,144,3085.77
-2024,Beachcomber in Wellfleet,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,170,4181.43
-2025,Beachcomber in Wellfleet,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,148,4083
-2025,Bistro 41 Restaurant & Bar,"4100 State Hwy,  Eastham, MA 02642",41.8506876,-69.9870109,52,898
+2021,The Beachcomber ,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,54,1214
+2022,The Beachcomber ,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,208,5002.2
+2023,The Beachcomber ,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,144,3085.77
+2024,The Beachcomber ,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,170,4181.43
+2025,The Beachcomber ,"1120 Cahoon Hollow Rd,  Wellfleet, MA 02667",41.944,-69.98516,148,4083
+2025,Bistro 41 Kitchen & Bar,"4100 State Hwy,  Eastham, MA 02642",41.8506876,-69.9870109,52,898
 2021,The Block & Tackle,"545 US-6,  Wellfleet, MA 02667",41.8921338,-69.9877414,0,0
 2022,The Block & Tackle,"545 US-6,  Wellfleet, MA 02667",41.8921338,-69.9877414,0,0
 2023,The Block & Tackle,"545 US-6,  Wellfleet, MA 02667",41.8921338,-69.9877414,0,0
@@ -51,7 +51,6 @@
 2021,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,54,950
 2022,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,82,814.98
 2023,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,86,841.03
-2025,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,29,358.22
 2024,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,55,636.96
 2025,CShore Kitchen and Bar,"555 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,36,543
 2021,Del Mar Bar & Bistro,"907 Main St,  Chatham, MA 02633",41.6860075,-69.9694353,0,0
@@ -68,19 +67,19 @@
 2022,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,0,0
 2023,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,0,0
 2024,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,22,326.07
-2021,FM,,,,0,0
-2022,FM,,,,0,0
-2023,FM,,,,8,193
-2024,FM,,,,0,0
+2021,Farmer's Market,,,,0,0
+2022,Farmer's Market,,,,0,0
+2023,Farmer's Market,,,,8,193
+2024,Farmer's Market,,,,0,0
 2025,Gloucester Shell-abration,,,,3,67.91
 2021,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,0,0
 2022,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,53,1091.15
 2023,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,97,2009.11
 2024,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,0,0
-2021,Mean Burgers Bar and Grille & Hog Island Beer Yard,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,0,0
-2022,Mean Burgers Bar and Grille & Hog Island Beer Yard,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,21,160.83
-2023,Mean Burgers Bar and Grille & Hog Island Beer Yard,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,66,878.46
-2024,Mean Burgers Bar and Grille & Hog Island Beer Yard,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,19,207
+2021, Hog Island Surf Lodge,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,0,0
+2022, Hog Island Surf Lodge,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,21,160.83
+2023, Hog Island Surf Lodge,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,66,878.46
+2024, Hog Island Surf Lodge,"842 US-6,  Wellfleet, MA 02667",41.9001595,-69.9842985,19,207
 2025,Lighthouse Inn,"1 Lighthouse Inn Rd,  West Dennis, MA 02670",41.6517888,-70.1693557,2,28.51
 2021,The Lobster Pot,"321 Commercial St,  Provincetown, MA 02657",42.052002,,0,0
 2022,The Lobster Pot,"321 Commercial St,  Provincetown, MA 02657",42.052002,,0,0
@@ -112,16 +111,16 @@
 2023,Moby Dick's Restaurant,"3225 US-6,  Wellfleet, MA 02667",41.9477383,-70.0333785,135,2006.91
 2024,Moby Dick's Restaurant,"3225 US-6,  Wellfleet, MA 02667",41.9477383,-70.0333785,118,2137.15
 2025,Moby Dick's Restaurant,"3225 US-6,  Wellfleet, MA 02667",41.9477383,-70.0333785,104,1849
-2025,Oyster Fest,,,,11,222.84
-2021,Pearl Restaurant & Bar,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,344,7350
-2022,Pearl Restaurant & Bar,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,143,2950.92
-2023,Pearl Restaurant & Bar,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,315,6646.84
-2024,Pearl Restaurant & Bar,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,518,11770.65
-2025,Pearl Restaurant & Bar,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,458,11317
-2021,The Squealing Pig Provincetown,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
-2022,The Squealing Pig Provincetown,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
-2023,The Squealing Pig Provincetown,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,123,2122.14
-2024,The Squealing Pig Provincetown,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
+2025,Newburyport Oyster Fest,,,,11,222.84
+2021,Pearl Wellfleet,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,344,7350
+2022,Pearl Wellfleet,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,143,2950.92
+2023,Pearl Wellfleet,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,315,6646.84
+2024,Pearl Wellfleet,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,518,11770.65
+2025,Pearl Wellfleet,"250 Commercial St,  Wellfleet, MA 02667",41.93055,-70.0300694,458,11317
+2021,The Squealing Pig,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
+2022,The Squealing Pig,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
+2023,The Squealing Pig,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,123,2122.14
+2024,The Squealing Pig,"335 Commercial St,  Provincetown, MA 02657",42.052385,-70.1848598,0,0
 2021,The Rail Orleans,"222 Main Street, Orleans, MA, 02653",41.7850058,-69.9652464,0,0
 2022,The Rail Orleans,"222 Main Street, Orleans, MA, 02653",41.7850058,-69.9652464,55,903.53
 2023,The Rail Orleans,"222 Main Street, Orleans, MA, 02653",41.7850058,-69.9652464,0,0
