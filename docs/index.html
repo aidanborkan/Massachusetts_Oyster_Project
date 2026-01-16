@@ -33,7 +33,10 @@ h2{font-size:18px;margin:0 0 6px}
 .toggle{display:inline-flex;border:1px solid #ccc;border-radius:8px;overflow:hidden}
 .toggle button{padding:6px 10px;border:0;background:#f3f4f6;font-size:13px;cursor:pointer}
 .toggle button.active{background:#2563eb;color:#fff}
+
 #restWrap{display:none;align-items:center;gap:6px;margin-left:10px}
+#eventWrap{display:none;align-items:center;gap:6px;margin-left:10px}   /* >>> CHANGE 12 (NEW) */
+
 select{padding:4px 6px;border-radius:6px;border:1px solid #ccc}
 </style>
 </head>
@@ -55,10 +58,18 @@ select{padding:4px 6px;border-radius:6px;border:1px solid #ccc}
         <button id="btnRest" role="tab" aria-selected="false">By Restaurant</button>
         <button id="btnEvent" role="tab" aria-selected="false">By Event</button>
       </div>
+
       <div id="restWrap">
         <label for="restSelect">Restaurant:</label>
         <select id="restSelect"></select>
       </div>
+
+      <!-- >>> CHANGE 13 (NEW): Event dropdown UI (mirrors Restaurant) -->
+      <div id="eventWrap">
+        <label for="eventSelect">Event:</label>
+        <select id="eventSelect"></select>
+      </div>
+
     </div>
 
     <h2>Shell Only Weight</h2>
@@ -76,6 +87,7 @@ window.addEventListener('load', function () {
     const COLORS     = {" Hog Island Surf Lodge": "rgb(136, 204, 238)", "Arnold's Lobster & Clam Bar": "rgb(204, 102, 119)", "Art and Oyster": "rgb(221, 204, 119)", "Bistro 41 Kitchen & Bar": "rgb(17, 119, 51)", "Bookstore & Restaurant": "rgb(51, 34, 136)", "Brine": "rgb(170, 68, 153)", "CERALDI": "rgb(68, 170, 153)", "CShore Kitchen and Bar": "rgb(153, 153, 51)", "Captain Parker's Pub": "rgb(136, 34, 85)", "Casa del Cabo": "rgb(102, 17, 0)", "Community": "rgb(136, 136, 136)", "Del Mar Bar & Bistro": "rgb(102,194,165)", "Elwood's Raw Bars": "rgb(252,141,98)", "Englewood Beach": "rgb(141,160,203)", "Farmer's Market": "rgb(231,138,195)", "Gloucester Shell-abration": "rgb(166,216,84)", "Governor Bradford Restaurant": "rgb(255,217,47)", "Lighthouse Inn": "rgb(229,196,148)", "Mac's Chatham Fish & Lobster": "rgb(179,179,179)", "Mac's Fish House Provincetown": "rgb(141,211,199)", "Mac's On the Pier": "rgb(255,255,179)", "Mac's Shack": "rgb(190,186,218)", "Moby Dick's Restaurant": "rgb(251,128,114)", "Newburyport Oyster Fest": "rgb(128,177,211)", "Pearl Wellfleet": "rgb(253,180,98)", "The Barley Neck": "rgb(179,222,105)", "The Beachcomber ": "rgb(252,205,229)", "The Block & Tackle": "rgb(217,217,217)", "The Lobster Pot": "rgb(188,128,189)", "The Rail Orleans": "rgb(204,235,197)", "The Squealing Pig": "rgb(255,237,111)", "The Wicked Oyster": "#636EFA", "Van Rensselaer's Restaurant and Raw Bar": "#EF553B", "Wilbur Park": "#00CC96", "Winslow's Tavern": "#AB63FA"};
     const NAMES      = [" Hog Island Surf Lodge", "Arnold's Lobster & Clam Bar", "Bistro 41 Kitchen & Bar", "Bookstore & Restaurant", "Brine", "CERALDI", "CShore Kitchen and Bar", "Captain Parker's Pub", "Casa del Cabo", "Del Mar Bar & Bistro", "Elwood's Raw Bars", "Englewood Beach", "Governor Bradford Restaurant", "Lighthouse Inn", "Mac's Chatham Fish & Lobster", "Mac's Fish House Provincetown", "Mac's On the Pier", "Mac's Shack", "Moby Dick's Restaurant", "Pearl Wellfleet", "The Barley Neck", "The Beachcomber ", "The Block & Tackle", "The Rail Orleans", "The Squealing Pig", "The Wicked Oyster", "Van Rensselaer's Restaurant and Raw Bar", "Wilbur Park", "Winslow's Tavern"];
     const ALL_RESTAURANTS = [" Hog Island Surf Lodge", "Arnold's Lobster & Clam Bar", "Bistro 41 Kitchen & Bar", "Bookstore & Restaurant", "Brine", "CERALDI", "CShore Kitchen and Bar", "Captain Parker's Pub", "Casa del Cabo", "Del Mar Bar & Bistro", "Elwood's Raw Bars", "Englewood Beach", "Governor Bradford Restaurant", "Lighthouse Inn", "Mac's Chatham Fish & Lobster", "Mac's Fish House Provincetown", "Mac's On the Pier", "Mac's Shack", "Moby Dick's Restaurant", "Pearl Wellfleet", "The Barley Neck", "The Beachcomber ", "The Block & Tackle", "The Rail Orleans", "The Squealing Pig", "The Wicked Oyster", "Van Rensselaer's Restaurant and Raw Bar", "Wilbur Park", "Winslow's Tavern"];
+    const ALL_EVENTS = ["Art and Oyster", "Community", "Farmer's Market", "Gloucester Shell-abration", "Newburyport Oyster Fest"];                 // >>> CHANGE 3 (NEW)
     const NAME       = "Restaurant";
 
     const mapDiv   = document.getElementById('mapFig');
@@ -87,8 +99,11 @@ window.addEventListener('load', function () {
     const restWrap = document.getElementById('restWrap');
     const restSelect = document.getElementById('restSelect');
 
+    const eventWrap   = document.getElementById('eventWrap');        // >>> CHANGE 4 (NEW)
+    const eventSelect = document.getElementById('eventSelect');      // >>> CHANGE 4 (NEW)
+
     // Abort cleanly if required DOM elements are missing
-    if (!mapDiv || !barDiv || !btnYear || !btnRest || !btnEvent || !restWrap || !restSelect) {
+    if (!mapDiv || !barDiv || !btnYear || !btnRest || !btnEvent || !restWrap || !restSelect || !eventWrap || !eventSelect) {
       console.error('Missing DOM elements for map/bar/toggle; aborting bar toggle setup.');
       return;
     }
@@ -152,175 +167,35 @@ window.addEventListener('load', function () {
       legendDiv.innerHTML = html;
     }
 
+    // >>> CHANGE 5 (NEW): you call renderLegendForEvent() but never defined it.
+    // This version mirrors renderLegendForRestaurant().
+    function renderLegendForEvent(ev){
+      if (!legendDiv) return;
+      const c = COLORS[ev] || '#888';
+      const html = '<div class="legend-item">' +
+                     '<span class="swatch" style="background:' + c + '"></span>' +
+                     '<span class="label">' + ev + '</span>' +
+                   '</div>';
+      legendDiv.innerHTML = html;
+    }
+
+    // ------------------------------------------------------------------
+    // OPTIONAL: keep your existing "renderBarByEvent()" (all-events view)
+    // We'll add a new single-event renderer used by the dropdown.
+    // ------------------------------------------------------------------
     function renderBarByEvent(){
-      // 1) Collect totals per (event, year)
-      const perEventYear = {};   // key: event -> {year -> weight}
-      const perEventTotal = {};  // key: event -> total across years
-      const yearSet = new Set();
-
-      for (let i = 0; i < DATA_EVENT.length; i++) {
-        const row = DATA_EVENT[i];
-        const ev  = row[NAME];
-        const yr  = String(row.Year);
-        const w   = row.Weight || 0;
-
-        if (!perEventYear[ev]) perEventYear[ev] = {};
-        perEventYear[ev][yr] = (perEventYear[ev][yr] || 0) + w;
-        perEventTotal[ev]    = (perEventTotal[ev]    || 0) + w;
-        yearSet.add(yr);
-      }
-
-      const sub = document.getElementById('barSubtitle');
-
-      // If no events, show empty chart + message
-      const eventNamesRaw = Object.keys(perEventTotal);
-      if (eventNamesRaw.length === 0){
-        Plotly.react(
-          barDiv,
-          [],
-          {
-            margin: { l:55, r:0, t:28, b:50 },
-            xaxis: { title: 'Pounds diverted (Shell Only Weight)' },
-            yaxis: { title: 'Event' }
-          },
-          { displaylogo: false, responsive: true }
-        );
-        if (sub) sub.textContent = 'No event contributions recorded.';
-        if (legendDiv) legendDiv.innerHTML = '';
-        return;
-      }
-
-      // Sort events by total descending so biggest contributors appear first
-      const eventNames = eventNamesRaw.slice().sort(function(a,b){
-        return (perEventTotal[b] || 0) - (perEventTotal[a] || 0);
-      });
-
-      const yearsForEvents = Array.from(yearSet).sort();
-
-      // ------------------------------------------------------------------
-      // CASE A: only one year of event data -> simple one-bar-per-event chart
-      // ------------------------------------------------------------------
-      if (yearsForEvents.length <= 1) {
-        const xVals = eventNames.map(function(ev){ return perEventTotal[ev] || 0; });
-        const colors = eventNames.map(function(ev){ return COLORS[ev] || '#555'; });
-        const totalAll = xVals.reduce(function(s,v){ return s + v; }, 0);
-
-        const trace = {
-          type: 'bar',
-          orientation: 'h',
-          x: xVals,
-          y: eventNames,
-          marker: { color: colors },
-          hovertemplate:
-            '<b>%{y}</b><br>' +
-            'Pounds diverted: %{x:,.0f} lbs<extra></extra>',
-          showlegend: false
-        };
-
-        const layout = {
-          margin: { l:230, r:20, t:28, b:40 },   // big left margin so long names fit
-          xaxis: {
-            title: 'Pounds diverted (Shell Only Weight)',
-            rangemode: 'tozero'
-          },
-          yaxis: {
-            title: 'Event',
-            automargin: true
-          },
-          bargap: 0.25,
-          width: 620,
-          height: Math.min(460, 50 * eventNames.length + 100)
-        };
-
-        Plotly.react(barDiv, [trace], layout, { displaylogo: false, responsive: true });
-
-        if (sub) {
-          sub.textContent =
-            'Events — Total diverted across all events: ' + toComma(totalAll) + ' lbs';
-        }
-
-        // Legend still shows event -> color mapping
-        renderLegendForEvent();
-        return;
-      }
-
-      // ------------------------------------------------------------------
-      // CASE B: multiple years of event data -> stacked by year
-      // ------------------------------------------------------------------
-
-      // Map each year -> a hatch pattern (years encoded by pattern, not color)
-      const shapes = ['/', '\\', 'x', '.', '+', '-'];
-      const patternByYear = {};
-      yearsForEvents.forEach(function(yr, idx){
-        patternByYear[yr] = shapes[idx % shapes.length];
-      });
-
-      const traces = [];
-      let grandTotal = 0;
-
-      yearsForEvents.forEach(function(yr){
-        const xVals = [];  // weights
-        const yVals = [];  // event names
-        const colors = []; // event colors
-        const patterns = [];
-
-        eventNames.forEach(function(ev){
-          const w = (perEventYear[ev] && perEventYear[ev][yr]) ? perEventYear[ev][yr] : 0;
-          xVals.push(w);
-          yVals.push(ev);
-          colors.push(COLORS[ev] || '#555');      // color by event name
-          patterns.push(patternByYear[yr]);       // pattern encodes year
-          grandTotal += w;
-        });
-
-        traces.push({
-          type: 'bar',
-          orientation: 'h',
-          x: xVals,
-          y: yVals,
-          marker: {
-            color: colors,
-            pattern: { shape: patterns }
-          },
-          hovertemplate:
-            '<b>%{y}</b><br>' +
-            'Year: ' + yr + '<br>' +
-            'Pounds diverted: %{x:,.0f} lbs<extra></extra>',
-          showlegend: false
-        });
-      });
-
-      const layout = {
-        barmode: 'stack',
-        margin: { l:230, r:20, t:28, b:40 },       // extra left margin for long names
-        xaxis: {
-          title: 'Pounds diverted (Shell Only Weight)',
-          rangemode: 'tozero'
-        },
-        yaxis: {
-          title: 'Event',
-          automargin: true
-        },
-        bargap: 0.25,
-        width: 620,
-        height: Math.min(460, 50 * eventNames.length + 100)
-      };
-
-      Plotly.react(barDiv, traces, layout, { displaylogo: false, responsive: true });
-
-      if (sub) {
-        sub.textContent =
-          'Events — Total diverted across all events: ' + toComma(grandTotal) +
-          ' lbs (patterns indicate year for each event).';
-      }
-
-      // Legend still shows event -> color mapping
-      renderLegendForEvent();
+      // ... (UNCHANGED: your existing all-events code stays here)
+      // NOTE: remove or update calls to renderLegendForEvent() inside this function:
+      // they currently call renderLegendForEvent() with NO ARGUMENT.
+      // If you keep this function, either:
+      //   (a) stop calling renderLegendForEvent() from inside it, OR
+      //   (b) call renderLegendForEvent(eventNames[0]) or similar.
     }
 
     // -------- Bar renderers --------
 
     function renderBarByYear(year){
+      // (UNCHANGED)
       const rows = DATA_YEAR
         .filter(function(r){ return String(r.Year) === String(year); })
         .sort(function(a,b){ return (b.Weight || 0) - (a.Weight || 0); });
@@ -377,6 +252,7 @@ window.addEventListener('load', function () {
     }
 
     function renderBarByRestaurant(restaurant){
+      // (UNCHANGED)
       const rows = DATA_REST
         .filter(function(r){ return r[NAME] === restaurant; })
         .map(function(r){
@@ -449,11 +325,73 @@ window.addEventListener('load', function () {
       }
     }
 
+    // >>> CHANGE 6 (NEW): single-event renderer (this is what dropdown will call)
+    function renderBarBySingleEvent(ev){
+      const rows = DATA_EVENT
+        .filter(function(r){ return r[NAME] === ev; })
+        .map(function(r){ return { Year: String(r.Year), Weight: r.Weight || 0 }; })
+        .sort(function(a,b){ return a.Year.localeCompare(b.Year); });
 
+      const sub = document.getElementById('barSubtitle');
+
+      if (rows.length === 0){
+        Plotly.react(
+          barDiv,
+          [],
+          {
+            margin: { l:55, r:0, t:28, b:50 },
+            xaxis: { title: 'Year', type: 'category' },
+            yaxis: { title: 'Pounds diverted (Shell Only Weight)' }
+          },
+          { displaylogo: false, responsive: true }
+        );
+        if (sub) sub.textContent = 'Event: ' + ev + ' — No recorded contributions (>0 lbs).';
+        return;
+      }
+
+      const xVals = rows.map(function(r){ return r.Year; });
+      const yVals = rows.map(function(r){ return r.Weight; });
+      const total = yVals.reduce(function(s,v){ return s + v; }, 0);
+
+      const trace = {
+        type: 'bar',
+        x: xVals,
+        y: yVals,
+        marker: { color: COLORS[ev] || '#888' },
+        hovertemplate:
+          '<b>' + ev + '</b><br>' +
+          'Year: %{x}<br>' +
+          'Pounds diverted: %{y:,.0f} lbs<extra></extra>',
+        showlegend: false
+      };
+
+      const layout = {
+        margin: { l:55, r:0, t:28, b:50 },
+        yaxis: { title: 'Pounds diverted (Shell Only Weight)', automargin: true, rangemode: 'tozero' },
+        xaxis: {
+          title: 'Year',
+          type: 'category',
+          categoryorder: 'array',
+          categoryarray: xVals,
+          tickmode: 'array',
+          tickvals: xVals,
+          ticktext: xVals,
+          tickangle: (xVals.length > 3 ? -30 : 0)
+        },
+        bargap: 0.25,
+        width: 520,
+        height: 420
+      };
+
+      Plotly.react(barDiv, [trace], layout, { displaylogo: false, responsive: true });
+
+      if (sub) sub.textContent = 'Event: ' + ev + ' — Total diverted: ' + toComma(total) + ' lbs';
+    }
 
     // -------- Dropdown + mode toggles --------
 
     function populateDropdownIfNeeded(){
+      // (UNCHANGED) restaurant dropdown
       if (restSelect.options.length > 0) return;
       const frag = document.createDocumentFragment();
       for (let i = 0; i < ALL_RESTAURANTS.length; i++) {
@@ -467,6 +405,7 @@ window.addEventListener('load', function () {
     }
 
     function pickInitialRestaurantValue(){
+      // (UNCHANGED)
       const haveData = new Set(DATA_REST.map(function(r){ return r[NAME]; }));
       for (let i = 0; i < ALL_RESTAURANTS.length; i++) {
         const r = ALL_RESTAURANTS[i];
@@ -475,11 +414,36 @@ window.addEventListener('load', function () {
       return ALL_RESTAURANTS[0] || '';
     }
 
+    // >>> CHANGE 7 (NEW): populate event dropdown (mirror restaurant behavior)
+    function populateEventDropdownIfNeeded(){
+      if (eventSelect.options.length > 0) return;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < ALL_EVENTS.length; i++) {
+        const ev = ALL_EVENTS[i];
+        const opt = document.createElement('option');
+        opt.value = ev;
+        opt.textContent = ev;
+        frag.appendChild(opt);
+      }
+      eventSelect.appendChild(frag);
+    }
+
+    // >>> CHANGE 8 (NEW): pick initial event that actually has data
+    function pickInitialEventValue(){
+      const haveData = new Set(DATA_EVENT.map(function(r){ return r[NAME]; }));
+      for (let i = 0; i < ALL_EVENTS.length; i++) {
+        const ev = ALL_EVENTS[i];
+        if (haveData.has(ev)) return ev;
+      }
+      return ALL_EVENTS[0] || '';
+    }
+
     function setModeYear(){
       btnYear.classList.add('active');
       btnRest.classList.remove('active');
       btnEvent.classList.remove('active');
       restWrap.style.display = 'none';
+      eventWrap.style.display = 'none';                 // >>> CHANGE 9 (NEW)
       const y = currentYear();
       renderBarByYear(y);
       renderLegendForYear(y);
@@ -490,6 +454,7 @@ window.addEventListener('load', function () {
       btnYear.classList.remove('active');
       btnEvent.classList.remove('active');
       restWrap.style.display = 'inline-flex';
+      eventWrap.style.display = 'none';                 // >>> CHANGE 9 (NEW)
       populateDropdownIfNeeded();
       if (!restSelect.value) {
         restSelect.value = pickInitialRestaurantValue();
@@ -503,9 +468,18 @@ window.addEventListener('load', function () {
       btnEvent.classList.add('active');
       btnYear.classList.remove('active');
       btnRest.classList.remove('active');
+
       restWrap.style.display = 'none';
-      renderBarByEvent();
-      renderLegendForEvent();
+      eventWrap.style.display = 'inline-flex';          // >>> CHANGE 10 (NEW)
+
+      populateEventDropdownIfNeeded();                  // >>> CHANGE 10 (NEW)
+      if (!eventSelect.value) {
+        eventSelect.value = pickInitialEventValue();    // >>> CHANGE 10 (NEW)
+      }
+
+      const ev = eventSelect.value;                     // >>> CHANGE 10 (NEW)
+      renderBarBySingleEvent(ev);                       // >>> CHANGE 10 (NEW)
+      renderLegendForEvent(ev);                         // >>> CHANGE 10 (NEW)
     }
 
     // Sync bar chart + legend when slider / animation changes year,
@@ -533,10 +507,18 @@ window.addEventListener('load', function () {
     btnYear.addEventListener('click', setModeYear);
     btnRest.addEventListener('click', setModeRestaurant);
     btnEvent.addEventListener('click', setModeEvent);
+
     restSelect.addEventListener('change', function(){
       const r = restSelect.value;
       renderBarByRestaurant(r);
       renderLegendForRestaurant(r);
+    });
+
+    // >>> CHANGE 11 (NEW): when event dropdown changes, redraw just that event
+    eventSelect.addEventListener('change', function(){
+      const ev = eventSelect.value;
+      renderBarBySingleEvent(ev);
+      renderLegendForEvent(ev);
     });
 
     // Initial view
