@@ -43,11 +43,11 @@
 2022,CERALDI,"9 Ryder St Ext,  Provincetown, MA 02657",42.0492367,-70.1838482,0,0
 2023,CERALDI,"9 Ryder St Ext,  Provincetown, MA 02657",42.0492367,-70.1838482,0,0
 2024,CERALDI,"9 Ryder St Ext,  Provincetown, MA 02657",42.0492367,-70.1838482,43,541.23
-2021,Community,,,,0,0
-2022,Community,,,,0,0
-2023,Community,,,,0,0
-2024,Community,,,,4,75.06
-2025,Community,,,,12,240
+2021,Wellfleet Community,,,,0,0
+2022,Wellfleet Community,,,,0,0
+2023,Wellfleet Community,,,,0,0
+2024,Wellfleet Community,,,,4,75.06
+2025, Wellfleet Community,,,,12,240
 2021,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,54,950
 2022,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,82,814.98
 2023,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,86,841.03
@@ -144,3 +144,7 @@
 2023,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,244,5092.47
 2024,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,249,5334
 2025,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,231,6729
+2022,Wellfleet Oyster Festival,,,,,6530
+2023,Wellfleet Oyster Festival,,,,,7760
+2024,Wellfleet Oyster Festival,,,,,8160
+2025,Wellfleet Oyster Festival,,,,,8530
