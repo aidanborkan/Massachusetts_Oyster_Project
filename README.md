@@ -20,7 +20,7 @@ Features include:
 The right-hand panel displays a dynamically updating bar chart based on the selected view mode and regional filters. All views are driven directly from the underlying dataset and remain synchronized with the map where applicable.
 
 Across Years
-The Across Years view aggregates shell recycling contributions over the full time span of the dataset.
+The Across Years view aggregates shell recycling contributions over the full time span of the dataset. <br>
 •	Each bar represents the total shell-only weight for a given year. <br>
 •	Contributions from individual restaurants are rendered as stacked segments. <br>
 •	This view provides a high-level summary of program growth and annual participation trends. <br>
