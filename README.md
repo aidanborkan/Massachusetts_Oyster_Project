@@ -12,15 +12,14 @@ The dashboard is generated programmatically in Python and rendered in the browse
 
 ### 1. Animated geospatial map of participating restaurants
 
-The left panel shows a year-by-year animation of all restaurants with geocoded latitude and longitude coordinates.
+The left panel shows a year-by-year animation of all restaurants with geocoded latitude/longitude coordinates.
 
-**Features include:**
-- A Cape Cod–focused map window with a fixed bounding box
+**Features include:
+- A Cape-Cod-focused map window (fixed bounding box)
 - Smooth animated transitions across years
 - Zoom and pan controls that persist while the animation runs
 - Marker colors that uniquely identify each restaurant or event contributor
 - Automatic jittering of overlapping restaurant locations to keep individual points visible and clickable
-
 ---
 
 ### 2. Data view modes, regional slicing, and visualization logic
