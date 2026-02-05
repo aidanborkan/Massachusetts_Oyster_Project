@@ -3,7 +3,7 @@ Massachusetts Oyster Project – Interactive Mapping & Analytics Dashboard
 This project provides an interactive, browser-based dashboard for visualizing data from the Massachusetts Oyster Project shell recycling program across participating restaurants and community events. This aims to support public reporting, grant applications, community outreach, and stakeholder engagement by making it easier to explore trends in participation and shell diversion from landfill over time.
 The dashboard is generated programmatically in Python and rendered in the browser using Plotly.js. It includes an animated geospatial map, synchronized bar charts, dynamic legends, and multiple data exploration modes.
 
-Overview of what the Shell Recycling Program Dashboard does:
+Overview of the Shell Recycling Program Dashboard:
 
 1. Animated geospatial map of participating restaurants
 
@@ -21,9 +21,9 @@ The right-hand panel displays a dynamically updating bar chart based on the sele
 
 Across Years
 The Across Years view aggregates shell recycling contributions over the full time span of the dataset.
-•	Each bar represents the total shell-only weight for a given year.
-•	Contributions from individual restaurants are rendered as stacked segments.
-•	This view provides a high-level summary of program growth and annual participation trends.
+•	Each bar represents the total shell-only weight for a given year. <br>
+•	Contributions from individual restaurants are rendered as stacked segments. <br>
+•	This view provides a high-level summary of program growth and annual participation trends. <br>
 When a regional filter is applied, totals are recalculated in real time to reflect only the selected geographic region(s), allowing direct comparison of regional participation patterns over time.
 ________________________________________
 By Region
