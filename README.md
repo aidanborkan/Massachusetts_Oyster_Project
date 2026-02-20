@@ -145,4 +145,16 @@ The embedded JavaScript controls:
 - Dynamic legend generation
 - Synchronization between the animated map and the Year bar chart
 
+#### How to Use
+
+Slider: controls year-by-year dynamic view of the greater Cape Cod region 2021-2025
+
+Map:
+- Each dot represents a geolocation for a restaurant participating in the MOP shell recycling program
+- hover over the dot to see a snapshot of individual contributions
+- click on the dot to zoom in and click out to zoom out
+
+Stacked Bar Plot:
+
+Internal Stakeholders: split view by region for Mid-Cape and Outer Cape
 
