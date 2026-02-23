@@ -1,4 +1,4 @@
-﻿Year,Restaurant,Full Address,Lat,Lon,Total Buckets,Shell Only Weight
+Year,Restaurant,Full Address,Lat,Lon,Total Buckets,Shell Only Weight
 2021,Arnold's Lobster & Clam Bar,"3580 US-6,  Eastham, MA 02642",41.8437838,-69.9826952,0,0
 2022,Arnold's Lobster & Clam Bar,"3580 US-6,  Eastham, MA 02642",41.8437838,-69.9826952,144,3259.56
 2023,Arnold's Lobster & Clam Bar,"3580 US-6,  Eastham, MA 02642",41.8437838,-69.9826952,143,2865.98
@@ -71,6 +71,9 @@
 2022,Farmer's Market,,,,0,0
 2023,Farmer's Market,,,,8,193
 2024,Farmer's Market,,,,0,0
+2023,Give a Shuck,,,,,140
+2024,Give a Shuck,,,,,190
+2025,Give a Shuck,,,,,408
 2025,Gloucester Shell-abration,,,,3,67.91
 2021,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,0,0
 2022,Governor Bradford Restaurant,"312 Commercial St,  Provincetown, MA 02657",42.052124,-70.185618,53,1091.15
