@@ -47,7 +47,7 @@ Year,Restaurant,Full Address,Lat,Lon,Total Buckets,Shell Only Weight
 2022,Wellfleet Community,,,,0,0
 2023,Wellfleet Community,,,,0,0
 2024,Wellfleet Community,,,,4,75.06
-2025, Wellfleet Community,,,,12,240
+2025,Wellfleet Community,,,,12,240
 2021,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,54,950
 2022,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,82,814.98
 2023,CShore Kitchen and Bar,"554 State Highway Route 6,  Wellfleet, MA 02667",41.8927339,-69.986524,86,841.03
@@ -67,10 +67,10 @@ Year,Restaurant,Full Address,Lat,Lon,Total Buckets,Shell Only Weight
 2022,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,0,0
 2023,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,0,0
 2024,Englewood Beach,"Englewood Beach,  199 Berry Ave, West Yarmouth",41.6403015,-70.2472381,22,326.07
-2021,Farmer's Market,,,,0,0
-2022,Farmer's Market,,,,0,0
-2023,Farmer's Market,,,,8,193
-2024,Farmer's Market,,,,0,0
+2021,Outer Cape Farmer's Market,,,,0,0
+2022,Outer Cape Farmer's Market,,,,0,0
+2023,Outer Cape Farmer's Market,,,,8,193
+2024,Outer Cape Farmer's Market,,,,0,0
 2023,Give a Shuck,,,,,140
 2024,Give a Shuck,,,,,190
 2025,Give a Shuck,,,,,408
@@ -150,21 +150,21 @@ Year,Restaurant,Full Address,Lat,Lon,Total Buckets,Shell Only Weight
 2022,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,244,4183.8
 2023,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,244,5092.47
 2024,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,249,5334
-2009,Wellfleet Oyster Festival,,,,,6000
-2010,Wellfleet Oyster Festival,,,,,8400
-2011,Wellfleet Oyster Festival,,,,,8800
-2012,Wellfleet Oyster Festival,,,,,10600
-2013,Wellfleet Oyster Festival,,,,,10000
-2014,Wellfleet Oyster Festival,,,,,11180
-2015,Wellfleet Oyster Festival,,,,,10000
-2016,Wellfleet Oyster Festival,,,,,0
-2017,Wellfleet Oyster Festival,,,,,7600
-2018,Wellfleet Oyster Festival,,,,,10000
-2019,Wellfleet Oyster Festival,,,,,6500
-2020,Wellfleet Oyster Festival,,,,,0
-2021,Wellfleet Oyster Festival,,,,,0
+2009,Wellfleet OysterFest,,,,,6000
+2010,Wellfleet OysterFest,,,,,8400
+2011,Wellfleet OysterFest,,,,,8800
+2012,Wellfleet OysterFest,,,,,10600
+2013,Wellfleet OysterFest,,,,,10000
+2014,Wellfleet OysterFest,,,,,11180
+2015,Wellfleet OysterFest,,,,,10000
+2016,Wellfleet OysterFest,,,,,0
+2017,Wellfleet OysterFest,,,,,7600
+2018,Wellfleet OysterFest,,,,,10000
+2019,Wellfleet OysterFest,,,,,6500
+2020,Wellfleet OysterFest,,,,,0
+2021,Wellfleet OysterFest,,,,,0
 2025,Winslow's Tavern,"316 Main St,  Wellfleet, MA 02667",41.9386027,-70.0315696,231,6729
-2022,Wellfleet Oyster Festival,,,,,6530
-2023,Wellfleet Oyster Festival,,,,,7760
-2024,Wellfleet Oyster Festival,,,,,8160
-2025,Wellfleet Oyster Festival,,,,,8530
+2022,Wellfleet OysterFest,,,,,6530
+2023,Wellfleet OysterFest,,,,,7760
+2024,Wellfleet OysterFest,,,,,8160
+2025,Wellfleet OysterFest,,,,,8530
