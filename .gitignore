@@ -1,0 +1,28 @@
+# Local configuration
+config.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.env/
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
