@@ -1,11 +1,12 @@
 from pathlib import Path
-
 import pandas as pd
 from sqlalchemy import URL, create_engine
+import sys
+
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_DIR))
 
 from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
-
-PROJECT_DIR = Path(r"C:\Users\suzan\Downloads\MOP")
 
 INPUT_FILE = PROJECT_DIR / "data" / "processed" / "combined_westport_yarmouth_all_coordinates.xlsx"
 SHEET_NAME = "Combined Data"

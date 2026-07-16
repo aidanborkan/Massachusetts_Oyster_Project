@@ -1,0 +1,28 @@
+
+==================================================
+Refresh started: Thu 07/16/2026 14:33:52.95
+Traceback (most recent call last):
+  File "C:\Users\suzan\Downloads\MOP\scripts\load_to_postgres.py", line 6, in <module>
+    from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+ModuleNotFoundError: No module named 'config'
+Refresh FAILED with exit code 1: Thu 07/16/2026 14:33:54.53
+
+==================================================
+Refresh started: Thu 07/16/2026 14:36:28.12
+Loaded 81 rows into public.shell_recycling_dashboard
+Refresh completed successfully: Thu 07/16/2026 14:36:31.78
+
+==================================================
+Refresh started: Thu 07/16/2026 15:28:54.12
+Loaded 81 rows into public.shell_recycling_dashboard
+Refresh completed successfully: Thu 07/16/2026 15:28:56.20
+
+==================================================
+Refresh started: Thu 07/16/2026 15:29:07.86
+Loaded 81 rows into public.shell_recycling_dashboard
+Refresh completed successfully: Thu 07/16/2026 15:29:09.78
+
+==================================================
+Refresh started: Thu 07/16/2026 15:31:34.68
+Loaded 81 rows into public.shell_recycling_dashboard
+Refresh completed successfully: Thu 07/16/2026 15:31:36.61
