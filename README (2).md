@@ -154,7 +154,7 @@ The Tableau dashboards extend the initial public visualization into a recurring 
 
 **Preview:**
 
-![Tableau dashboard preview](docs/images/tableau-dashboard-preview.png)
+![Tableau dashboard preview](docs/images/tableau-dashboard-preview.png) https://public.tableau.com/app/profile/aidan.borkan/viz/Westport/WestportShellRecyclingProgram
 
 The combined dashboard currently supports reporting for:
 
