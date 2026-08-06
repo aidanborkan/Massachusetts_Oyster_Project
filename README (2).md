@@ -64,7 +64,7 @@ The original dashboard is a self-contained, browser-based visualization generate
 
 **Preview:**
 
-![Python and Plotly dashboard preview](docs/images/plotly-dashboard-preview.png)
+![Python and Plotly dashboard preview]([docs/images/plotly-dashboard-preview.png](https://aidanborkan.github.io/Massachusetts_Oyster_Project/))
 
 #### Animated geospatial map
 
@@ -154,7 +154,7 @@ The Tableau dashboards extend the initial public visualization into a recurring 
 
 **Preview:**
 
-![Tableau dashboard preview](docs/images/tableau-dashboard-preview.png) https://public.tableau.com/app/profile/aidan.borkan/viz/Westport/WestportShellRecyclingProgram
+![Tableau dashboard preview]([docs/images/tableau-dashboard-preview.png](https://public.tableau.com/app/profile/aidan.borkan/viz/Westport/WestportShellRecyclingProgram)) 
 
 The combined dashboard currently supports reporting for:
 
