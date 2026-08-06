@@ -58,13 +58,13 @@ This project was developed to:
 
 The original dashboard is a self-contained, browser-based visualization generated programmatically in Python and rendered with Plotly.js.
 
-**Live dashboard:** [Add deployed dashboard link]
+**Live dashboard:** (https://aidanborkan.github.io/Massachusetts_Oyster_Project/)
 
 **Source code:** [Add link to dashboard-generation script]
 
 **Preview:**
 
-![Python and Plotly dashboard preview]([docs/images/plotly-dashboard-preview.png](https://aidanborkan.github.io/Massachusetts_Oyster_Project/))
+![Python and Plotly dashboard preview](["Docs\Screenshot 2026-08-05 220104.png"])
 
 #### Animated geospatial map
 
